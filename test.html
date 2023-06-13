@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #test{
+       display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; 
+      }
+      #test button{
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border:0;
+        }
+      .pink{background-color: pink !important ;}
+      .skyblue{ background-color: skyblue !important;}
+      .greenyellow {background-color: greenyellow !important;}
+      .active{border: white solid !important;
+              background-color:transparent !important;
+              color: white !important;}
+    </style>
+    <script
+     src="https://code.jquery.com/jquery-2.2.4.js"
+     integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+     crossorigin="anonymous">
+    </script>
+    <script>
+           $(document).ready(function(){ //화면이 열리면 기능해라
+        let count =1;    // 초기값 선언 , 인터벌 돌리려고
+       $("#test button").click(function(){ //선택자와 이벤트가 지정된 함수선언 아이디가 테스트인 버튼을 클릭했을때 기능해라
+       $("body").removeClass().addClass($(this).data("color")); // 바디에 클래스 지워주고 다시 그것들(버튼)에 데이타색깔을 넣어
+       $("#test button").removeClass("active") // 아이디기테스트인 버튼을 눌렀을때 액티브 지워
+       $(this).addClass("active") // (버튼에 다시 액티브 넣어주랑)
+
+       }) 
+       
+       setInterval(function(){
+        count++; // 변수 증가
+        count %= $("#test button").length; //변수의 돌아가는 수는 아이디가테스트인 버튼의 렌스보다 작을때
+        $("#test button").eq(count).click(); //반드시 선언식 밑에 위치해야한다
+       },2000) //1초에 누를게
+  
+       
+    }) 
+    </script>
+     
+</head>
+<body class="skyblue">
+    <section id="test">
+        <div class="btn">
+            <button data-color="pink">pink</button>
+            <button data-color="skyblue" class="active">skyblue</button>
+            <button data-color="greenyellow">greenyellow</button>
+        </div>
+    </section>
+</body>
+</html>
